@@ -22,6 +22,7 @@ public class LoginListener implements ApplicationListener<AuthenticationSuccessE
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         Object principal = event.getAuthentication().getPrincipal();
         
+
         if (principal instanceof UserDetails userDetails) {
             log.info("Logado com usuário: {}", userDetails.getUsername());
             
