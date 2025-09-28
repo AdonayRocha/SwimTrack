@@ -19,7 +19,7 @@ public class LoginListener implements ApplicationListener<AuthenticationSuccessE
     }
 
     @Override
-    public void onApplicationEvent(AuthenticationSuccessEvent event) {
+    public void onApplicationEvent(@org.springframework.lang.NonNull AuthenticationSuccessEvent event) {
         Object principal = event.getAuthentication().getPrincipal();
         
 

@@ -13,8 +13,8 @@
                 <form action="/login" method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="mb-3">
-                        <label for="username" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="username" name="username" required>
+                        <label for="username" class="form-label">Usuário</label>
+                        <input type="text" class="form-control" id="username" name="username" required placeholder="admin">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Senha</label>

@@ -5,9 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
+// @Service - Comentado para evitar conflito com InMemoryUserDetailsManager
 public class CustomUserDetailsService implements UserDetailsService {
     
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
