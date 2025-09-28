@@ -34,7 +34,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/register", "/auth/login", "/register", "/error", "/h2-console/**", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/login", "/auth/**", "/register", "/error", "/h2-console/**", "/css/**", "/js/**", "/static/**", "/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
@@ -49,8 +49,10 @@ public class SecurityConfig {
             )
             .headers(headers -> headers
                 .frameOptions(frameOptions -> frameOptions.sameOrigin())
-            ) // Para H2 Console
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")); // Permitir H2 Console
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/h2-console/**", "/api/auth/**")
+            );
         
         return http.build();
     }

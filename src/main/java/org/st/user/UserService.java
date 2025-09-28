@@ -34,8 +34,6 @@ public class UserService {
         user.setName(name);
         user.setEmail(email);
         
-        // TODO: Hash da senha e salvamento
-        
         User savedUser = userRepository.save(user);
         log.info("Usuário registrado com sucesso: {}", savedUser.getName());
         return savedUser;
