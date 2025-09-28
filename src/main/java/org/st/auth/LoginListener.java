@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.st.user.User;
 import org.st.user.UserService;
 
 @Component
@@ -21,13 +22,25 @@ public class LoginListener implements ApplicationListener<AuthenticationSuccessE
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         Object principal = event.getAuthentication().getPrincipal();
         
-        if (principal instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) principal;
+        if (principal instanceof UserDetails userDetails) {
             log.info("Logado com usuário: {}", userDetails.getUsername());
-        } else {
+            
+            // Usa o userService para verificar informações do usuário
+            try {
+                // Tenta encontrar o usuário por email (assumindo que username = email)
+                User user = userService.findByEmail(userDetails.getUsername());
+                if (user != null) {
+                    log.debug("Usuário {} encontrado no sistema: {}", userDetails.getUsername(), user.getName());
+                } else {
+                    log.debug("Usuário {} não encontrado na base local", userDetails.getUsername());
+                }
+            } catch (Exception e) {
+                log.warn("Erro ao acessar informações do usuário: {}", e.getMessage());
+            }
+        } else if (principal != null) {
             log.info("Logado com usuário: {}", principal.toString());
+        } else {
+            log.warn("Principal é null no evento de autenticação");
         }
-        
-        // TODO: Implementar registro/atualização de usuário se necessário
     }
 }

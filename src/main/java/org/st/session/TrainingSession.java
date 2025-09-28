@@ -1,17 +1,12 @@
-package org.st.domain;
+package org.st.session;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "training_sessions")
 public class TrainingSession {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -30,6 +25,18 @@ public class TrainingSession {
     
     @Column(length = 1000)
     private String notes;
+
+    // Construtor padrão
+    public TrainingSession() {}
+
+    // Construtor com parâmetros
+    public TrainingSession(LocalDateTime date, int duration, double distance, String type, String notes) {
+        this.date = date;
+        this.duration = duration;
+        this.distance = distance;
+        this.type = type;
+        this.notes = notes;
+    }
 
     // Getters
     public String getId() {
@@ -79,5 +86,17 @@ public class TrainingSession {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return "TrainingSession{" +
+                "id='" + id + '\'' +
+                ", date=" + date +
+                ", duration=" + duration +
+                ", distance=" + distance +
+                ", type='" + type + '\'' +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 }
