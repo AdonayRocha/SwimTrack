@@ -41,3 +41,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Firebase ###
+*firebase-adminsdk*.json
+!firebase-adminsdk-example.json
