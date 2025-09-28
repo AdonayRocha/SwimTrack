@@ -21,6 +21,9 @@ public class TrainingSessionService {
     }
 
     public TrainingSession save(TrainingSession session) {
+        if (session.getId() == null || session.getId().isEmpty()) {
+            session.setId(java.util.UUID.randomUUID().toString());
+        }
         return repository.save(session);
     }
     

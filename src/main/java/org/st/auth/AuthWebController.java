@@ -8,6 +8,11 @@ public class AuthWebController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; 
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register";
     }
 }
