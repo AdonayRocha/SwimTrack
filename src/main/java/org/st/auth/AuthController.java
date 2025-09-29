@@ -38,13 +38,8 @@ public class AuthController {
     @PostMapping("/firebase-login")
     public ResponseEntity<?> firebaseLogin(@RequestBody FirebaseLoginRequest req) {
         try {
-            // Verificar o token Firebase (já implementado no FirebaseAuthenticationFilter)
-            // Aqui você pode adicionar lógica específica para o login Google
-            
-            // Verificar se o usuário já existe na base de dados
             User user = userService.findByEmail(req.getEmail());
             if (user == null && req.getName() != null) {
-                // Criar usuário automaticamente se não existir
                 user = new User();
                 user.setName(req.getName());
                 user.setEmail(req.getEmail());
@@ -57,7 +52,6 @@ public class AuthController {
         }
     }
     
-    // Classes internas para requests
     public static class LoginRequest {
         private String email;
         private String password;

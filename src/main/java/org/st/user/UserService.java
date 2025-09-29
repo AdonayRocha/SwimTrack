@@ -25,7 +25,6 @@ public class UserService {
     public User register(String name, String email, String password) {
         log.info("Registrando novo usuário: {} - {}", name, email);
         
-        // Verificar se o usuário já existe
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Usuário já existe com este email");
         }

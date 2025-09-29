@@ -26,9 +26,7 @@ public class LoginListener implements ApplicationListener<AuthenticationSuccessE
         if (principal instanceof UserDetails userDetails) {
             log.info("Logado com usuário: {}", userDetails.getUsername());
             
-            // Usa o userService para verificar informações do usuário
             try {
-                // Tenta encontrar o usuário por email (assumindo que username = email)
                 User user = userService.findByEmail(userDetails.getUsername());
                 if (user != null) {
                     log.debug("Usuário {} encontrado no sistema: {}", userDetails.getUsername(), user.getName());
